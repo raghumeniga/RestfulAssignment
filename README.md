@@ -27,7 +27,7 @@ Details
 4. RestfulProcessor.java is the controller which is responsible to process all the events requests
 
 
-####API Calls for processesing the event requests
+API Calls for processesing the event requests
 ------------
 
 **Insert the new event:**
