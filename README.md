@@ -3,7 +3,7 @@ RestfulAssignment
 
 Simple REST-based API that processes requests to manage an "events" resource over HTTP using JSON.
 
-Development ENV
+Development environment
 ------------
 Java/J2EE 
 
