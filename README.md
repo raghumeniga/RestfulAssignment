@@ -117,7 +117,7 @@ curl -X DELETE "http://localhost:8080/Assignment/events/2"
 ```
 ------------
 
-####Few error messages
+Few error messages
 ------------
 **When the data is not a proper JSON**
 ```json
