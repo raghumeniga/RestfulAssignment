@@ -18,13 +18,13 @@ Installation
 
 1. Install Tomcat 7 and setup the server to listen 8999
 2. Deploy Assignment.war in webapps folder of Tomcat
+3. Configure the database location in db.properties (/<TOMCAT_HOME>Assignment/WEB-INF/classes/resources/db.properties)
 
 Details
 ------------
-1. Constant.java holds the database path etc..
-2. Codes.java holds the status codes for rest calls
-3. Queries.java holds all the quries of the project
-4. RestfulProcessor.java is the controller which is responsible to process all the events requests
+1. Codes.java holds the status codes for rest calls
+2. Queries.java holds all the quries of the project
+3. RestfulProcessor.java is the controller which is responsible to process all the events requests
 
 
 API Calls for processesing the event requests
