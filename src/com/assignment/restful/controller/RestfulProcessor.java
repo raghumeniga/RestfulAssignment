@@ -1,5 +1,8 @@
 package com.assignment.restful.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * @author Raghavendra Prasad
  * 
@@ -7,10 +10,15 @@ package com.assignment.restful.controller;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Properties;
+
+import javax.annotation.PostConstruct;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.datasource.embedded.DataSourceFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -292,6 +300,40 @@ public class RestfulProcessor {
 			}catch(Exception ee){}
 		}
 		return  output.toString();
+		
+	}
+	
+	public static final HashMap<String,String> db_properties=new HashMap<String,String>();
+	/*
+	 * 
+	 * Load the db file during initialization 
+	 * 
+	 */
+	@PostConstruct
+	public void init() {
+		
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = DataSourceFactory.class.getClassLoader().getResourceAsStream("/resources/db.properties");
+			// load a properties file
+			prop.load(input);
+			db_properties.put("database_location", prop.getProperty("database_location"));
+			db_properties.put("database_driver","jdbc:sqlite:"+prop.getProperty("database_location"));
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		
 	}
 	

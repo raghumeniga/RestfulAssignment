@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.assignment.restful.controller.RestfulProcessor;
 import com.assignment.restful.other.Constant;
 import com.assignment.restful.other.Queries;
 
@@ -28,12 +29,18 @@ public class EventDAO {
 	 */
 	public EventDAO(){
 		try{
-		Class.forName(Constant.DB_DRIVER_CLASS);
-		File dbFile=new File(Constant.DB_FILE_PATH);
+		Class.forName("org.sqlite.JDBC");	
+		File dbFile=new File(RestfulProcessor.db_properties.get("database_location"));
 	 	if(!dbFile.exists())
 	 	{
 	 		createDB();
 	 	}
+	 	else{
+	 			
+	 	}
+	 	
+	 	
+	 	
 		}catch(Exception e){}
 	 	
 	 }
@@ -43,13 +50,13 @@ public class EventDAO {
 	 */
 	public int createDB()
 	 {
-		
 		Connection con = null;
 	 	PreparedStatement stmt = null;
 	 	int res=0;
 	 	try
 	 		{
-	 			con = DriverManager.getConnection(Constant.DB_URL);
+	 		
+	 			con = DriverManager.getConnection(RestfulProcessor.db_properties.get("database_driver"));
 	 			stmt = con.prepareStatement(Queries.CREATE_EVENT_TABLE);
 	 			res=stmt.executeUpdate();
 	 			stmt.close();
@@ -57,7 +64,6 @@ public class EventDAO {
 	 			
 	 		}catch(Exception e)
 	 		{
-	 			
 	 			
 	 		}finally
 	 		{  try{
@@ -83,7 +89,7 @@ public class EventDAO {
 	 	ResultSet rset=null;
 	 	try
 	 		{
-	 			con = DriverManager.getConnection(Constant.DB_URL);
+	 			con = DriverManager.getConnection(RestfulProcessor.db_properties.get("database_driver"));
 	 			stmt = con.prepareStatement(Queries.INSERT_EVENT);
 	 			stmt.setString(1, this.event.getData());
 	 			res=stmt.executeUpdate();
@@ -121,7 +127,7 @@ public class EventDAO {
 	 	int res=0;
 	 	try
 	 		{
-	 			con = DriverManager.getConnection(Constant.DB_URL);
+	 			con = DriverManager.getConnection(RestfulProcessor.db_properties.get("database_driver"));
 	 			stmt = con.prepareStatement(Queries.UPDATE_EVENT);
 	 			stmt.setString(1, this.event.getData());
 	 			stmt.setInt(2, this.event.getId());
@@ -155,7 +161,7 @@ public class EventDAO {
 	 	int res=0;
 	 	try
 	 		{
-	 			con = DriverManager.getConnection(Constant.DB_URL);
+	 			con = DriverManager.getConnection(RestfulProcessor.db_properties.get("database_driver"));
 	 			stmt = con.prepareStatement(Queries.DELETE_EVENT);
 	 			stmt.setInt(1, id);
 	 			res=stmt.executeUpdate();
@@ -185,7 +191,7 @@ public class EventDAO {
 	 	int res=0;
 	 	try
 	 		{
-	 			con = DriverManager.getConnection(Constant.DB_URL);
+	 			con = DriverManager.getConnection(RestfulProcessor.db_properties.get("database_driver"));
 	 			stmt = con.prepareStatement(Queries.DELETE_ALL_EVENTS);
 	 			res=stmt.executeUpdate();
 	 			stmt.close();
@@ -215,7 +221,7 @@ public class EventDAO {
 	 	ArrayList<Event> result=new ArrayList<Event>();
 	 	try
 	 		{
-	 			con = DriverManager.getConnection(Constant.DB_URL);
+	 			con = DriverManager.getConnection(RestfulProcessor.db_properties.get("database_driver"));
 	 			stmt = con.prepareStatement(Queries.LIST_ALL_EVENTS);
 	 			rset=stmt.executeQuery();
 	 			while(rset.next()){
@@ -248,7 +254,7 @@ public class EventDAO {
 	 	Event event=null;
 	 	try
 	 		{
-	 			con = DriverManager.getConnection(Constant.DB_URL);
+	 			con = DriverManager.getConnection(RestfulProcessor.db_properties.get("database_driver"));
 	 			stmt = con.prepareStatement(Queries.GET_EVENT);
 	 			stmt.setInt(1, id);
 	 			rset=stmt.executeQuery();
