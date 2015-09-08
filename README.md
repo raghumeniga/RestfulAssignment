@@ -19,6 +19,7 @@ Installation
 1. Install Tomcat 7 and setup the server to listen 8999
 2. Deploy Assignment.war in webapps folder of Tomcat
 3. Configure the database location in db.properties (/<TOMCAT_HOME>Assignment/WEB-INF/classes/resources/db.properties)
+4. If you change the db.properties then you need to restart the server.
 
 Details
 ------------
